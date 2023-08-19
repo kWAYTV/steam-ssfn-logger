@@ -1,6 +1,5 @@
 from os import system, name
 from datetime import datetime
-from discord.ext import commands
 from colorama import Fore, Style
 from src.helper.datetime import DateTime
 from pystyle import Colors, Colorate, Center
@@ -15,8 +14,7 @@ logo = """
 
 class Logger:
 
-    def __init__(self, bot: commands.Bot = None):
-        self.bot = bot
+    def __init__(self):
         self.datetime_helper = DateTime()
         # Set the colors for the logs
         self.log_types = {
