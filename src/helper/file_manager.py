@@ -29,9 +29,7 @@ class FileManager():
             self.logger.log("INFO", "Sessions folder not found, creating one...")
             os.mkdir("src/database/container/")
 
-        # if the folder /src/util/rollback/ doesn't exist, create it.
-
-        # if the folder "C:/ssfn_downloads" doesn't exist, create it.
-        if not os.path.isdir(self.config.manually_downloaded_ssfn_path):
-            self.logger.log("INFO", "Manually downloaded ssfn folder not found, creating one...")
-            os.mkdir(self.config.get("manually_downloaded_ssfn_path"))
+        # if the folder /src/util/rollback/ doesn't exist, create it.   
+        if not os.path.isdir("src/util/rollback/"):
+            self.logger.log("INFO", "Rollback folder not found, creating one...")
+            os.mkdir("src/util/rollback/")
