@@ -1,2 +1,3 @@
 # Tool settings
-username: "" # Just your username
+username: ""
+manually_downloaded_ssfn_path: "C:/ssfn_downloads" # Path to manually downloaded ssfn file
