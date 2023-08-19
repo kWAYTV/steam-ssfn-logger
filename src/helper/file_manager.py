@@ -4,7 +4,7 @@ from src.helper.config import Config
 
 defaultConfig = """
 # Tool settings
-username: kWAY
+username: "username_here"
 manually_downloaded_ssfn_path: "C:\ssfn_downloads" # Path to manually downloaded ssfn file
 """
 
@@ -27,7 +27,9 @@ class FileManager():
         # if the folder /src/data/sessions/ doesn't exist, create it.
         if not os.path.isdir("src/database/container/"):
             self.logger.log("INFO", "Sessions folder not found, creating one...")
-            os.mkdir("src/data/sessions/")
+            os.mkdir("src/database/container/")
+
+        # if the folder /src/util/rollback/ doesn't exist, create it.
 
         # if the folder "C:/ssfn_downloads" doesn't exist, create it.
         if not os.path.isdir(self.config.manually_downloaded_ssfn_path):
