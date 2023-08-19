@@ -20,9 +20,10 @@ class SSFNHandler:
 
         final_url = f"https://ssfnbox.com/download/ssfn{ssfn}?sec={sec_value.group(1)}"
         response = requests.get(final_url, headers=self.headers)
+        response.raise_for_status()
 
         for file in os.listdir(steam_path):
-            if file.startswith(f'ssfn{ssfn}'):
+            if file.startswith(f'ssfn'):
                 os.remove(os.path.join(steam_path, file))
                 print("Removed old SSFN file")
 
