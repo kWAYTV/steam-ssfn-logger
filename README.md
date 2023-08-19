@@ -28,4 +28,4 @@ We welcome contributions! If you've found a bug or have a feature request, pleas
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## 💜 Credits
-https://github.com/bet3rd/ssfnlogger - for the idea
+[bet3rd](https://github.com/bet3rd/ssfnlogger) - for the idea
