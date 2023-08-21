@@ -178,6 +178,15 @@ class AccountsDB:
             return f"{days} days {hours} hours {minutes} minutes {seconds} seconds"
         return None
 
+    def get_identifier_column(self, identifier):
+        """Get the identifier column based on the identifier."""
+        if identifier.isdigit():
+            return "id"
+        elif identifier.isalnum():
+            return "username"
+        else:
+            return None
+
     def close_connection(self):
         """Close the database connection."""
         if self.connection:
