@@ -1,6 +1,7 @@
 import os, time, webbrowser
 from src.util.logger import Logger
 from src.steam.reg import SteamReg
+from src.database.db import AccountsDB
 from src.handler.ssfn import SSFNHandler
 
 class SteamUtil:
@@ -9,6 +10,7 @@ class SteamUtil:
         self.logger = Logger()
         self.reg = SteamReg()
         self.ssfn = SSFNHandler()
+        self.accounts_db = AccountsDB()
 
     def download_account_ssfn(self, ssfn):
         return self.ssfn.download(ssfn, self.reg.get_steam_path())
@@ -39,4 +41,9 @@ class SteamUtil:
         steam_exe_path = self.reg.get_steam_exe_path()
         shutdown_cmd = f'"{steam_exe_path}" -shutdown'
         os.system(shutdown_cmd)
+        time.sleep(1)
+
+    def import_old_db(self):
+        self.logger.log("INFO", "Importing old database...")
+        self.accounts_db.import_from_old_db()
         time.sleep(1)

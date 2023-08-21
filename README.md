@@ -1,6 +1,6 @@
 # Steam SSFN Loader 🚂
 
-![Steam SSFN Loader Preview](screenshot.png)
+![Steam SSFN Loader Preview](preview.png)
 
 Welcome to the Steam SSFN Loader, a powerful tool designed to streamline your Steam experience!
 

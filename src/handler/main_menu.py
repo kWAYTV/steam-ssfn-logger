@@ -14,7 +14,8 @@ class MainMenuHandler:
             "3": self.manager.display_remove_menu,
             "4": self.manager.display_ban_menu,
             "5": self.steam_util.kill_steam,
-            "6": self.steam_util.execute_rollback,
+            "6": self.steam_util.import_old_db,
+            "7": self.steam_util.execute_rollback,
             "x": self.exit_program,
             "*": lambda: None
         }
@@ -38,7 +39,8 @@ class MainMenuHandler:
                 {Fore.LIGHTCYAN_EX}3{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Remove account(s){Style.RESET_ALL}
                 {Fore.LIGHTCYAN_EX}4{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Ban/Unban account(s){Style.RESET_ALL}
                 {Fore.LIGHTCYAN_EX}5{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Kill Steam processe(s){Style.RESET_ALL}
-                {Fore.LIGHTCYAN_EX}6{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} One-click Steam Rollback/Unroll{Style.RESET_ALL}
+                {Fore.LIGHTCYAN_EX}6{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Import users from old database{Style.RESET_ALL}
+                {Fore.LIGHTCYAN_EX}7{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} One-click Steam Rollback/Unroll{Style.RESET_ALL}
                 {Fore.LIGHTCYAN_EX}X{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Exit{Style.RESET_ALL}
             """
             print(menu)
