@@ -1,5 +1,4 @@
 import time
-from pystyle import Center
 from colorama import Fore, Style
 from src.util.logger import Logger
 from src.database.db import AccountsDB
@@ -23,7 +22,7 @@ class AddMenuHandler:
         self.logger.log("INFO", "Adding account with entire string")
         account_input = input(f" -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Account in format (username----password----ssfnXXXX or username:password:ssfnXXXX): {Style.RESET_ALL}")
         account = self.account_fetcher.fetch_account_by_string(account_input)
-        if not self.accounts_db.account_exists_by_username(account[0]):
+        if not self.accounts_db.account_exists("username", account[0]):
             self.accounts_db.add_user(account[0], account[1], account[2])
             self.logger.log("INFO", "Account added successfully!")
             time.sleep(1)
@@ -43,7 +42,7 @@ class AddMenuHandler:
         password = input(f" -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Password: {Style.RESET_ALL}")
         ssfn = input(f" -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} SSFN: {Style.RESET_ALL}")
 
-        if not self.accounts_db.account_exists_by_username(username):
+        if not self.accounts_db.account_exists("username", username):
             self.accounts_db.add_user(username, password, ssfn)
             self.logger.log("INFO", "Account added successfully!")
             time.sleep(1)
@@ -58,9 +57,9 @@ class AddMenuHandler:
     def display_add_menu(self):
         while True:
             self.logger.print_logo()
-            print(f"{Fore.LIGHTCYAN_EX}*{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Add Menu{Style.RESET_ALL}")
             menu = f"""
                 {Fore.LIGHTCYAN_EX}*{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Add Menu{Style.RESET_ALL}
+                
                 {Fore.LIGHTCYAN_EX}1{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Add account with entire string{Style.RESET_ALL}
                 {Fore.LIGHTCYAN_EX}2{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Add account step by step{Style.RESET_ALL}
                 {Fore.LIGHTCYAN_EX}.{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Go back{Style.RESET_ALL}

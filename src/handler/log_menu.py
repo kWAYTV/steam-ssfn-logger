@@ -18,7 +18,7 @@ class LogMenuHandler:
     def log_in_by_id(self, id):
         self.manager.print_logs_box()
         self.logger.log("INFO", "Logging in by ID")
-        account = self.accounts_db.get_account_by_id(id)
+        account = self.accounts_db.get_account("id", id)
         if account:
             self.logger.log("INFO", f"Logging in with account {account[1]}")
             self.steam_session.login(account[1], account[2], account[3])
@@ -39,6 +39,7 @@ class LogMenuHandler:
                 {accounts}
 
                 {Fore.LIGHTCYAN_EX}*{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Log in Menu{Style.RESET_ALL}
+                
                 {Fore.LIGHTCYAN_EX}id{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Log in by id{Style.RESET_ALL}
                 {Fore.LIGHTCYAN_EX}.{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Go back{Style.RESET_ALL}
             """
@@ -49,13 +50,11 @@ class LogMenuHandler:
             if option in self.menu_actions:
                 action = self.menu_actions.get(option)
                 if action: action()
-            # Assuming all ID's are numbers, if not you may need to adjust this check
-            elif option.isdigit():
-                # If not a menu action, attempt to log in with the provided ID
-                if not self.log_in_by_id(option):
-                    self.manager.print_logs_box()
-                    self.logger.log("ERROR", "Invalid id! Please try again.")
-                    time.sleep(1)
+            # Assuming all ID's are numbers
+            elif option.isdigit() and not self.log_in_by_id(option):
+                self.manager.print_logs_box()
+                self.logger.log("ERROR", "Invalid id! Please try again.")
+                time.sleep(1)
             else:
                 self.manager.print_logs_box()
                 self.logger.log("ERROR", "Invalid option! Please try again.")

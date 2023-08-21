@@ -27,9 +27,9 @@ class FileManager():
         # if the folder /src/data/sessions/ doesn't exist, create it.
         if not os.path.isdir("src/database/container/"):
             self.logger.log("INFO", "Sessions folder not found, creating one...")
-            os.mkdir("src/database/container/")
+            os.makedirs("src/database/container/")
 
         # if the folder /src/util/rollback/ doesn't exist, create it.   
         if not os.path.isdir("src/util/rollback/"):
             self.logger.log("INFO", "Rollback folder not found, creating one...")
-            os.mkdir("src/util/rollback/")
+            os.makedirs("src/util/rollback/")

@@ -10,15 +10,11 @@ class SteamUtil:
         self.reg = SteamReg()
         self.ssfn = SSFNHandler()
 
-    def get_steam_path(self):
-        return self.reg.get_steam_path()
-    
     def download_account_ssfn(self, ssfn):
-        return self.ssfn.download(ssfn, self.get_steam_path())
+        return self.ssfn.download(ssfn, self.reg.get_steam_path())
 
     def autologin(self, username, password):
-        steam_path = self.get_steam_path()
-        steam_exe_path = os.path.join(steam_path, "steam.exe")
+        steam_exe_path = self.reg.get_steam_exe_path()
         launch_command = f'"{steam_exe_path}" -noreactlogin -rememberlogin -rememberpassword -login {username} {password}'
         os.system(f'start "CSGO" {launch_command}')
 
@@ -36,4 +32,11 @@ class SteamUtil:
         self.logger.log("INFO", "Killing Steam...")
         kill_cmd = "taskkill /f /im steam.exe"
         os.system(kill_cmd)
+        time.sleep(1)
+
+    def shutdown_steam(self):
+        self.logger.log("INFO", "Shutting down Steam...")
+        steam_exe_path = self.reg.get_steam_exe_path()
+        shutdown_cmd = f'"{steam_exe_path}" -shutdown'
+        os.system(shutdown_cmd)
         time.sleep(1)

@@ -13,24 +13,21 @@ class RemoveMenuHandler:
             "*": lambda: None
         }
 
-    def exit_program(self):
-        self.manager.print_logs_box()
-        self.logger.log("INFO", "Exiting...")
-        exit()
-
-    def remove_account_by_id(self, id):
+    def remove_account(self, identifier):
         self.manager.print_logs_box()
         self.logger.log("INFO", "Removing account by ID")
 
-        if self.accounts_db.account_exists_by_id(id):
-            self.accounts_db.remove_user_by_id(id)
-            self.logger.log("INFO", "Account removed successfully!")
-            time.sleep(1)
-            self.manager.display_main_menu()
-        else:
+        identifier_column = self.accounts_db.get_identifier_column(identifier)
+        if not identifier_column:
             self.logger.log("ERROR", "Account not found!")
             time.sleep(1)
-            self.manager.display_main_menu()
+            return False
+
+        self.accounts_db.remove_user(identifier_column, identifier)
+        self.logger.log("INFO", "Account removed!")
+        time.sleep(1)
+        self.manager.display_remove_menu()
+        return True
 
     def display_remove_menu(self):
         while True:
@@ -41,6 +38,7 @@ class RemoveMenuHandler:
                 {accounts}
 
                 {Fore.LIGHTCYAN_EX}*{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Remove Menu{Style.RESET_ALL}
+                
                 {Fore.LIGHTCYAN_EX}id{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Remove account by ID{Style.RESET_ALL}
                 {Fore.LIGHTCYAN_EX}.{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Go back{Style.RESET_ALL}
             """
@@ -51,12 +49,13 @@ class RemoveMenuHandler:
             if option in self.menu_actions:
                 action = self.menu_actions.get(option)
                 if action: action()
-            # Assuming all ID's are numbers, if not you may need to adjust this check
-            elif option.isdigit():
-                # If not a menu action, attempt to remove the account with the provided ID
-                self.remove_account_by_id(option)
+            # Assuming all ID's are numbers
+            elif option.isdigit() and not self.remove_account(option):
+                self.manager.print_logs_box()
+                self.logger.log("ERROR", "Invalid id! Please try again.")
+                time.sleep(1)
             else:
                 self.manager.print_logs_box()
-                self.logger.log("ERROR", "Invalid option or ID! Please try again.")
+                self.logger.log("ERROR", "Invalid option! Please try again.")
                 time.sleep(1)
 

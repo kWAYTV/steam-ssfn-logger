@@ -12,8 +12,9 @@ class MainMenuHandler:
             "1": self.manager.display_log_menu,
             "2": self.manager.display_add_menu,
             "3": self.manager.display_remove_menu,
-            "4": self.steam_util.kill_steam,
-            "5": self.steam_util.execute_rollback,
+            "4": self.manager.display_ban_menu,
+            "5": self.steam_util.kill_steam,
+            "6": self.steam_util.execute_rollback,
             "x": self.exit_program,
             "*": lambda: None
         }
@@ -31,11 +32,13 @@ class MainMenuHandler:
             self.logger.print_logo()
             menu = f"""
                 {Fore.LIGHTCYAN_EX}*{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Main Menu{Style.RESET_ALL}
+                
                 {Fore.LIGHTCYAN_EX}1{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Log in{Style.RESET_ALL}
                 {Fore.LIGHTCYAN_EX}2{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Add an account{Style.RESET_ALL}
                 {Fore.LIGHTCYAN_EX}3{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Remove an account{Style.RESET_ALL}
-                {Fore.LIGHTCYAN_EX}4{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Kill Steam processes{Style.RESET_ALL}
-                {Fore.LIGHTCYAN_EX}5{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} One-click Steam Rollback/Unroll{Style.RESET_ALL}
+                {Fore.LIGHTCYAN_EX}4{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Ban/Unban accounts{Style.RESET_ALL}
+                {Fore.LIGHTCYAN_EX}5{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Kill Steam processes{Style.RESET_ALL}
+                {Fore.LIGHTCYAN_EX}6{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} One-click Steam Rollback/Unroll{Style.RESET_ALL}
                 {Fore.LIGHTCYAN_EX}X{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Exit{Style.RESET_ALL}
             """
             print(menu)
