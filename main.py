@@ -5,8 +5,7 @@ from src.handler.menu_manager import MenuManager
 from src.helper.file_manager import FileManager
 
 # Set title
-if os.name == 'nt':
-    os.system("title SSFN Logger Tool • Ready! • discord.gg/kws")
+os.system(f"title SSFN Logger Tool {Config().build_version} • Ready! • discord.gg/kws")
 
 # Set logging system
 logging.basicConfig(handlers=[logging.FileHandler('ssfntool.log', 'w+', 'utf-8')], level=logging.ERROR, format='%(asctime)s: %(message)s')
