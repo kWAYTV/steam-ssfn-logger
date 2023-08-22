@@ -22,9 +22,6 @@ class Main():
         self.logger.print_logo()
         self.logger.log("INFO", f"Welcome, {self.config.username}! Starting SSFN Logger Tool...")
 
-        # Check if the files are there
-        self.file_manager.check_input()
-
         # Display the menu
         self.menu_manager.display_main_menu()
 
