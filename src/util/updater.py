@@ -1,4 +1,4 @@
-import requests, re, webbrowser
+import requests, re, webbrowser, time
 from colorama import Fore
 from src.util.logger import Logger
 from src.helper.config import Config
@@ -16,12 +16,15 @@ class Updater:
             if option.lower() == "n":
                 self.logger.log("INFO", "Opening GitHub page...")
                 webbrowser.open(self.config.github_url)
+                time.sleep(1)
                 exit()
             if option.lower() == "y":
                 self.logger.log("INFO", "Continuing without updating...")
+                time.sleep(1)
                 pass
             else:
                 self.logger.log("ERROR", "Invalid option!")
+                time.sleep(1)
                 exit()
         else:
             pass
@@ -31,11 +34,9 @@ class Updater:
 
         self.logger.print_logo()
         self.logger.log("UPDATER", "Checking for updates...")
-        # Fetch the config.py from GitHub
+
         response = requests.get(self.config.version_github_url)
-        
         if response.status_code == 200:
-            # Extract the build_version from fetched file using regex
             version_match = re.search(r'self.build_version: str = "([\d\.]+)"', response.text)
             
             if version_match:
@@ -44,13 +45,17 @@ class Updater:
                 
                 if github_version == local_version:
                     self.logger.log("UPDATER", "You are using the latest version.")
+                    time.sleep(1)
                     return False
                 else:
                     self.logger.log("UPDATER", f"Update available! Latest version: {github_version} - Your version: {local_version}")
+                    time.sleep(1)
                     return True
             else:
                 self.logger.log("UPDATER", "Failed to extract version from GitHub. Please check manually.")
+                time.sleep(1)
                 return False
         else:
             self.logger.log("UPDATER", "Failed to fetch updates from GitHub. Please check your internet connection.")
+            time.sleep(1)
             return False
