@@ -1,4 +1,5 @@
 import time, webbrowser
+from getkey import getkey
 from colorama import Fore, Style
 from src.util.logger import Logger
 from src.util.steamutil import SteamUtil
@@ -16,7 +17,7 @@ class MainMenuHandler:
             "5": self.steam_util.kill_steam,
             "6": self.steam_util.import_old_db,
             "7": self.steam_util.execute_rollback,
-            "x": self.exit_program,
+            ".": self.exit_program,
             "*": lambda: None
         }
 
@@ -41,10 +42,11 @@ class MainMenuHandler:
                 {Fore.LIGHTCYAN_EX}5{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Kill Steam processe(s){Style.RESET_ALL}
                 {Fore.LIGHTCYAN_EX}6{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Import users from old database{Style.RESET_ALL}
                 {Fore.LIGHTCYAN_EX}7{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} One-click Steam Rollback/Unroll{Style.RESET_ALL}
-                {Fore.LIGHTCYAN_EX}X{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Exit{Style.RESET_ALL}
+                {Fore.LIGHTCYAN_EX}.{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Exit{Style.RESET_ALL}
             """
             print(menu)
-            option = input(f" -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Option: {Style.RESET_ALL}").lower()
+            print(f" -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Option: {Style.RESET_ALL}")
+            option = getkey().lower()
 
             action = self.menu_actions.get(option)
             if action: action()

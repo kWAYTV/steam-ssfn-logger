@@ -1,5 +1,4 @@
-import sqlite3
-import time
+import sqlite3, time, os
 from colorama import Fore, Style
 from src.util.logger import Logger
 from src.helper.config import Config
@@ -47,7 +46,7 @@ class AccountsDB:
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 username TEXT NOT NULL UNIQUE,
                 password TEXT NOT NULL,
-                ssfn TEXT NOT NULL UNIQUE,
+                ssfn TEXT NOT NULL,
                 is_banned INTEGER DEFAULT 0,
                 banned_timestamp INTEGER DEFAULT 0
             );
@@ -191,6 +190,36 @@ class AccountsDB:
         """Close the database connection."""
         if self.connection:
             self.connection.close()
+
+    def import_from_old_db(self):
+        """Import the accounts from the old database."""
+        old_db_path = input(f" -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Old database path: {Style.RESET_ALL}")
+        if os.path.exists(old_db_path):
+            try:
+                old_connection = sqlite3.connect(old_db_path)
+                old_cursor = old_connection.cursor()
+                old_cursor.execute("SELECT * FROM accounts_db")
+                rows = old_cursor.fetchall()
+                if rows:
+                    for row in rows:
+                        self.add_user(row[1], row[2], row[3])
+                    self.logger.log("INFO", "Successfully imported accounts from the old database!")
+                    time.sleep(1)
+                    return True
+                else:
+                    self.logger.log("ERROR", "Old database is empty!")
+                    time.sleep(1)
+                    return False
+            except sqlite3.Error as e:
+                self.logger.log("ERROR", f"Error importing accounts from the old database: {e}")
+                time.sleep(1)
+                return False
+            finally:
+                old_connection.close()
+        else:
+            self.logger.log("ERROR", "Old database path not found!")
+            time.sleep(1)
+            return False
 
     def __del__(self):
         """Destructor to ensure the connection is closed."""

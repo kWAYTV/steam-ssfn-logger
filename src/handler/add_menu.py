@@ -1,4 +1,5 @@
 import time
+from getkey import getkey
 from colorama import Fore, Style
 from src.util.logger import Logger
 from src.database.db import AccountsDB
@@ -65,7 +66,8 @@ class AddMenuHandler:
                 {Fore.LIGHTCYAN_EX}.{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Go back{Style.RESET_ALL}
             """
             print(menu)
-            option = input(f" -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Option: {Style.RESET_ALL}").lower()
+            print(f" -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Option: {Style.RESET_ALL}")
+            option = getkey().lower()
 
             action = self.menu_actions.get(option)
             if action: action()
