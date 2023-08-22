@@ -14,6 +14,15 @@ class FileManager():
         self.logger = Logger()
         self.config = Config()
 
+    def ensure_directory(self, path):
+        """Ensure that a directory exists. If it doesn't, create it."""
+        if not os.path.isdir(path):
+            try:
+                self.logger.log("INFO", f"{path} folder not found, creating one...")
+                os.makedirs(path, exist_ok=True)
+            except Exception as e:
+                self.logger.log("ERROR", f"Failed to create directory {path}. Error: {e}")
+
     # Function to check if the input files are valid
     def check_input(self):
 
@@ -24,12 +33,5 @@ class FileManager():
             self.logger.log("INFO", "Successfully created config.yml, please fill it out and try again.")
             exit()
 
-        # if the folder /src/data/sessions/ doesn't exist, create it.
-        if not os.path.isdir("src/database/container/"):
-            self.logger.log("INFO", "Sessions folder not found, creating one...")
-            os.makedirs("src/database/container/")
-
-        # if the folder /src/util/rollback/ doesn't exist, create it.   
-        if not os.path.isdir("src/util/rollback/"):
-            self.logger.log("INFO", "Rollback folder not found, creating one...")
-            os.makedirs("src/util/rollback/")
+        self.ensure_directory("src/database/container/")
+        self.ensure_directory("src/util/rollback/")
