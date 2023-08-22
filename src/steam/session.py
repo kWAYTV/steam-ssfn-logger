@@ -11,7 +11,7 @@ class SteamSession:
         self.menu_manager = manager
     
     def login(self, username, password, ssfn):
-        self.steam_util.shutdown_steam()
+        self.steam_util.kill_steam()
         self.steam_util.download_account_ssfn(ssfn)
         self.steam_util.autologin(username, password)
         self.menu_manager.display_main_menu()

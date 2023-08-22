@@ -31,10 +31,14 @@ class SteamUtil:
             time.sleep(1)
 
     def kill_steam(self):
-        self.logger.log("INFO", "Killing Steam...")
-        kill_cmd = "taskkill /f /im steam.exe"
-        os.system(kill_cmd)
-        time.sleep(1)
+        try:
+            self.logger.log("INFO", "Killing Steam...")
+            kill_cmd = "taskkill /f /im steam.exe"
+            os.system(kill_cmd)
+            time.sleep(1)
+        except Exception as e:
+            self.logger.log("ERROR", f"Error killing Steam: {e} (Did you run as administrator?)")
+            time.sleep(1)
 
     def shutdown_steam(self):
         self.logger.log("INFO", "Shutting down Steam...")
