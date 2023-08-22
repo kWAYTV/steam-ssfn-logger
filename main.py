@@ -1,8 +1,9 @@
 import os, logging
 from src.util.logger import Logger
 from src.helper.config import Config
-from src.handler.menu_manager import MenuManager
+from src.util.updater import Updater
 from src.helper.file_manager import FileManager
+from src.handler.menu_manager import MenuManager
 
 # Set title
 os.system(f"title SSFN Logger Tool {Config().build_version} • Ready! • discord.gg/kws")
@@ -14,6 +15,7 @@ class Main():
     def __init__(self) -> None:
         self.logger = Logger()
         self.config = Config()
+        self.updater = Updater()
         self.file_manager = FileManager()
         self.menu_manager = MenuManager()
 
@@ -21,6 +23,9 @@ class Main():
         # Clean the screen, print the logo and start the logger
         self.logger.print_logo()
         self.logger.log("INFO", f"Welcome, {self.config.username}! Starting SSFN Logger Tool...")
+
+        # Check for updates
+        self.updater.check_update()
 
         # Display the menu
         self.menu_manager.display_main_menu()

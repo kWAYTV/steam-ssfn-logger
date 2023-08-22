@@ -21,6 +21,7 @@ class Logger:
             "INFO": Fore.CYAN,
             "OK": Fore.GREEN,
             "WARNING": Fore.YELLOW,
+            "UPDATER": Fore.YELLOW,
             "SLEEP": Fore.YELLOW,
             "ERROR": Fore.RED,
             "INPUT": Fore.BLUE,

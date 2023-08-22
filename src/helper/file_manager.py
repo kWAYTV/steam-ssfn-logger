@@ -4,8 +4,12 @@ from src.helper.config import Config
 
 defaultConfig = """
 # Tool settings
-username: "username_here"
-manually_downloaded_ssfn_path: "C:\ssfn_downloads" # Path to manually downloaded ssfn file
+username: username_here
+manually_downloaded_ssfn_path: "C:/ssfn_downloads" # Path to manually downloaded ssfn file
+
+# Github urls
+github_url: https://github.com/kWAYTV/steam-ssfn-logger
+version_github_url: https://raw.githubusercontent.com/kWAYTV/steam-ssfn-logger/main/src/helper/config.py
 """
 
 class FileManager():
