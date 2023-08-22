@@ -12,11 +12,13 @@ class Updater:
     def check_update(self):
         # Check for updates
         if self.check_versions():
-            option = input(f" -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Are you sure you want to continue without updating? [y/n]")
+            option = input(f" -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Are you sure you want to continue without updating? [y/n] ")
             if option.lower() == "n":
+                self.logger.log("INFO", "Opening GitHub page...")
                 webbrowser.open(self.config.github_url)
                 exit()
             if option.lower() == "y":
+                self.logger.log("INFO", "Continuing without updating...")
                 pass
             else:
                 self.logger.log("ERROR", "Invalid option!")
