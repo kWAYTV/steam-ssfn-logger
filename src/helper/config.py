@@ -8,7 +8,7 @@ class Config():
             self.config = yaml.load(file, Loader=SafeLoader)
 
             # Set the Build version & icon
-            self.build_version: str = "1.4"
+            self.build_version: str = "1.4.1"
 
             self.username: str = self.config["username"]
             self.manually_downloaded_ssfn_path: str = self.config["manually_downloaded_ssfn_path"]

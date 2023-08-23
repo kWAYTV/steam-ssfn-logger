@@ -45,7 +45,7 @@ class SSFNHandler:
             f.write(response.content)
 
     def download_server(self, ssfn, steam_path):
-        url = f"tool.ctrl000.cc:66/ssfn/ssfn{ssfn}"
+        url = f"https://tool.ctrl000.cc:66/ssfn/ssfn{ssfn}"
         self.logger.log("INFO", "Requesting SSFN file...")
 
         response = requests.get(url, headers=self.headers)

@@ -1,6 +1,5 @@
 import os
 from src.util.logger import Logger
-from src.helper.config import Config
 
 defaultConfig = """
 # Tool settings
@@ -16,7 +15,6 @@ class FileManager():
 
     def __init__(self):
         self.logger = Logger()
-        self.config = Config()
         # Check if the files are there
         self.check_input()
 

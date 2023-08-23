@@ -45,8 +45,7 @@ class LogMenuHandler:
                 {Fore.LIGHTCYAN_EX}.{Fore.WHITE} -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Go back{Style.RESET_ALL}
             """
             print(menu)
-            print(f" -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Option: {Style.RESET_ALL}")
-            option = getkey().lower()
+            option = input(f" -{Fore.LIGHTCYAN_EX}>{Fore.WHITE} Option: {Style.RESET_ALL}").lower()
 
             # Check if the input is one of the menu actions
             if option in self.menu_actions:

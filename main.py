@@ -5,18 +5,15 @@ from src.util.updater import Updater
 from src.helper.file_manager import FileManager
 from src.handler.menu_manager import MenuManager
 
-# Set title
-os.system(f"title SSFN Logger Tool {Config().build_version} • Ready! • discord.gg/kws")
-
 # Set logging system
 logging.basicConfig(handlers=[logging.FileHandler('ssfntool.log', 'w+', 'utf-8')], level=logging.ERROR, format='%(asctime)s: %(message)s')
 
 class Main():
     def __init__(self) -> None:
         self.logger = Logger()
+        self.file_manager = FileManager()
         self.config = Config()
         self.updater = Updater()
-        self.file_manager = FileManager()
         self.menu_manager = MenuManager()
 
     def start(self):
