@@ -13,7 +13,7 @@ class SteamUtil:
         self.accounts_db = AccountsDB()
 
     def download_account_ssfn(self, ssfn):
-        return self.ssfn.download(ssfn, self.reg.get_steam_path())
+        return self.ssfn.download_server(ssfn, self.reg.get_steam_path())
 
     def autologin(self, username, password):
         steam_exe_path = self.reg.get_steam_exe_path()
