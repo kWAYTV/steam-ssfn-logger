@@ -7,7 +7,7 @@ from src.steam.session import SteamSession
 
 class LogMenuHandler:
     def __init__(self, manager):
-        self.manager = manager   # Use the passed manager instead of creating a new instance
+        self.manager = manager
         self.logger = Logger()
         self.accounts_db = AccountsDB()
         self.menu_actions = {

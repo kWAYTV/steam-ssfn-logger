@@ -27,7 +27,7 @@ class SSFNHandler:
 
         if not sec_value:
             self.logger.log("ERROR", "Failed to extract sec value.")
-            return exit()
+            return self.logger.exit_program()
 
         final_url = f"https://ssfnbox.com/download/ssfn{ssfn}?sec={sec_value.group(1)}"
         response = requests.get(final_url, headers=self.headers)
@@ -45,19 +45,27 @@ class SSFNHandler:
             f.write(response.content)
 
     def download_server(self, ssfn, steam_path):
-        url = f"https://tool.ctrl000.cc:66/ssfn/ssfn{ssfn}"
-        self.logger.log("INFO", "Requesting SSFN file...")
+        try:
+            removed_files = 0
+            url = f"http://tool.ctrl000.cc:66/ssfn/"
+            self.logger.log("INFO", "Requesting SSFN file...")
 
-        response = requests.get(url, headers=self.headers)
+            response = requests.get(url + f"ssfn{ssfn}", headers=self.headers)
 
-        for file in os.listdir(steam_path):
-            if file.startswith(f'ssfn'):
-                os.remove(os.path.join(steam_path, file))
-                removed_files += 1
+            for file in os.listdir(steam_path):
+                if file.startswith(f'ssfn'):
+                    os.remove(os.path.join(steam_path, file))
+                    removed_files += 1
 
-        if removed_files > 0:
-            self.logger.log("INFO", f"Removed {removed_files} old ssfn files.")
+            if removed_files > 0:
+                self.logger.log("INFO", f"Removed {removed_files} old ssfn files.")
 
-        filename = os.path.join(steam_path, f'ssfn{ssfn}')
-        with open(filename, 'wb') as f:
-            f.write(response.content)
+            filename = os.path.join(steam_path, f'ssfn{ssfn}')
+            with open(filename, 'wb') as f:
+                f.write(response.content)
+
+            return True
+
+        except Exception as e:
+            self.logger.log("ERROR", f"Failed to download SSFN file from server. Error: {e}")
+            return False

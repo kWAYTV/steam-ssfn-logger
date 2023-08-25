@@ -5,10 +5,13 @@ defaultConfig = """
 # Tool settings
 username: username_here
 manually_downloaded_ssfn_path: "C:/ssfn_downloads" # Path to manually downloaded ssfn file
+rollback_path: "src/util/rollback" # Path to steam rollback folder
+rollback_exe_path: "src/util/rollback/steam-rollback.exe" # Path to steam-rollback.exe
 
 # Github urls
 github_url: https://github.com/kWAYTV/steam-ssfn-logger
 version_github_url: https://raw.githubusercontent.com/kWAYTV/steam-ssfn-logger/main/src/helper/config.py
+steam_rollback_url: https://github.com/IMXNOOBX/steam-rollback/releases/download/steam-rollback/steam-rollback.exe
 """
 
 class FileManager():
@@ -33,7 +36,7 @@ class FileManager():
             self.logger.log("INFO", "Config file not found, creating one...")
             open("config.yaml", "w+").write(defaultConfig)
             self.logger.log("INFO", "Successfully created config.yml, please fill it out and try again.")
-            exit()
+            self.logger.exit_program()
 
     # Function to check if the input files are valid
     def check_input(self):

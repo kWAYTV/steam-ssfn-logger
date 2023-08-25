@@ -23,8 +23,7 @@ class MainMenuHandler:
 
     def exit_program(self):
         self.manager.print_logs_box()
-        self.logger.log("INFO", "Bye!")
-        exit()
+        self.logger.exit_program()
 
     def open_website(self):
         webbrowser.open("https://kwayservices.top")

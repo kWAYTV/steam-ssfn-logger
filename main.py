@@ -1,4 +1,4 @@
-import os, logging
+import logging, pyuac
 from src.util.logger import Logger
 from src.helper.config import Config
 from src.util.updater import Updater
@@ -28,5 +28,10 @@ class Main():
         self.menu_manager.display_main_menu()
 
 if __name__ == "__main__":
-    app = Main()
-    app.start()
+    if not pyuac.isUserAdmin():
+        print("Re-launching as admin! You can close this window.")
+        pyuac.runAsAdmin()
+    else:
+        app = Main()
+        app.start()
+        input("Press Enter to exit...")  # This keeps the window open

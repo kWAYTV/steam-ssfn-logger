@@ -1,9 +1,12 @@
 import re
+from src.util.logger import Logger
 
 class SteamAccount:
+    def __init__(self):
+        self.logger = Logger()
 
     @staticmethod
-    def fetch_account_by_string(account):
+    def fetch_account_by_string(self, account):
         try:
             separator = ':' if ':' in account else '----'
             pattern = re.compile(f'(.*?){separator}', re.S)
@@ -13,4 +16,4 @@ class SteamAccount:
             return username, password, ssfn
         except:
             print('Incorrect account format. Expected format: username----password----ssfnXXXX or username:password:ssfnXXXX')
-            exit()
+            self.logger.exit_program()

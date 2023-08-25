@@ -3,6 +3,7 @@ from src.util.logger import Logger
 from src.steam.reg import SteamReg
 from src.database.db import AccountsDB
 from src.handler.ssfn import SSFNHandler
+from src.util.rollback import SteamRollback
 
 class SteamUtil:
 
@@ -11,6 +12,7 @@ class SteamUtil:
         self.reg = SteamReg()
         self.ssfn = SSFNHandler()
         self.accounts_db = AccountsDB()
+        self.rollback = SteamRollback()
 
     def download_account_ssfn(self, ssfn):
         return self.ssfn.download_server(ssfn, self.reg.get_steam_path())
@@ -21,14 +23,7 @@ class SteamUtil:
         os.system(f'start "CSGO" {launch_command}')
 
     def execute_rollback(self):
-        self.logger.log("INFO", "Executing Steam Rollback/Unroll...")
-        rollback_cmd = "src/util/rollback/steam-rollback.exe"
-        if os.path.exists(rollback_cmd):
-            os.system(f'start "Rollback by https://github.com/IMXNOOBX" {rollback_cmd}')
-        else:
-            self.logger.log("ERROR", f"{rollback_cmd} does not exist! Opening download link...")
-            webbrowser.open("https://github.com/IMXNOOBX/steam-rollback/releases")
-            time.sleep(1)
+        self.rollback.execute_rollback()
 
     def kill_steam(self):
         try:

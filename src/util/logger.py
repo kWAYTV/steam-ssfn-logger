@@ -1,3 +1,5 @@
+import time
+from sys import exit
 from os import system, name
 from datetime import datetime
 from colorama import Fore, Style
@@ -22,6 +24,7 @@ class Logger:
             "OK": Fore.GREEN,
             "WARNING": Fore.YELLOW,
             "UPDATER": Fore.YELLOW,
+            "ROLLBACK": Fore.YELLOW,
             "SLEEP": Fore.YELLOW,
             "ERROR": Fore.RED,
             "INPUT": Fore.BLUE,
@@ -30,6 +33,11 @@ class Logger:
     # Clear console function
     def clear(self):
         system("cls" if name in ("nt", "dos") else "clear")
+
+    def exit_program(self):
+        self.log("INFO", "Bye!")
+        time.sleep(2)
+        exit()
 
     def print_logo(self):
         self.clear()
@@ -40,5 +48,5 @@ class Logger:
     def log(self, type, message):
         color = self.log_types[type]
         now = datetime.now()
-        current_time = now.strftime("%d/%m/%Y • %H:%M:%S")
-        print(f"{Style.DIM}{current_time} • {Style.RESET_ALL}{Style.BRIGHT}{color}[{Style.RESET_ALL}{type}{Style.BRIGHT}{color}] {Style.RESET_ALL}{Style.BRIGHT}{Fore.WHITE}{message}")
+        current_time = now.strftime("%d/%m/%Y - %H:%M:%S")
+        print(f"{Style.DIM}{current_time} - {Style.RESET_ALL}{Style.BRIGHT}{color}[{Style.RESET_ALL}{type}{Style.BRIGHT}{color}] {Style.RESET_ALL}{Style.BRIGHT}{Fore.WHITE}{message}")
